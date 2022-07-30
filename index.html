@@ -41,7 +41,7 @@
 <body>
     <h1>Encode callsign for EchoLink enabled repeater DTMF dialing!</h1>
     <div class="form">
-        <input type="text" id="callsing"><br>   
+        <input type="text" id="callsign"><br>   
         <input type="button" value="Encode" id="encode">
     </div>
     <div id="encodedText">
@@ -63,7 +63,7 @@
             71, 11, 72, 73,
             81, 82, 83,
             91, 92, 93, 12];
-            var input = (document.getElementById("callsing").value).toString();
+            var input = (document.getElementById("callsign").value).toString();
             if(input != ""){
                 var result = new Array;
                 for (let i = 0; i < input.length; i++) {
@@ -75,7 +75,7 @@
                         result.push(encodeTable[input[i].charCodeAt(0)-97]);
                     
             }
-            document.getElementById("encodedText").innerHTML ="encoded callsing:<br>" + result.join(' ');
+            document.getElementById("encodedText").innerHTML ="encoded callsign:<br>" + result.join(' ');
             }
             
         }
