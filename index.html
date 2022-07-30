@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echolink callSign encode</title>
+    <style>
+        #encode{
+            padding: 40px;
+            background-color: #379683;
+            border: 0px;
+            color: #EDF5E1;
+            border-radius: 10px;}
+        input{
+            margin: 20px;
+            font-size: x-large;
+            background-color: #379683;
+            color: #EDF5E1;
+            text-align: center;
+            border: 0;
+            padding: 10px;
+            border-radius: 5px;}
+        body{
+            padding: 0px;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            text-align: center;
+            background-color: #05386B;
+            color: #5CDB95;}
+        #encodedText{
+            font-size: xx-large;
+            margin-top: 20px;}
+        .footer{
+            position: absolute;
+            bottom: 0;
+            padding: 1%;
+            margin: 0;}
+
+    </style>
+</head>
+<body>
+    <h1>Encode callsign for EchoLink enabled repeater DTMF dialing!</h1>
+    <div class="form">
+        <input type="text" id="callsing"><br>   
+        <input type="button" value="Encode" id="encode">
+    </div>
+    <div id="encodedText">
+
+    </div>
+    <div class="footer">
+        Created By Wiktor Paluchniak SP5FUJ in 2022
+    </div>
+    <script>
+        document.getElementById("encode").addEventListener("click", encode); 
+
+        function encode(){
+            var encodeTable=
+            [21, 22, 23,
+            31, 32, 33,
+            41, 42, 43,
+            51, 52, 53, 
+            61, 62, 63,
+            71, 11, 72, 73,
+            81, 82, 83,
+            91, 92, 93, 12];
+            var input = (document.getElementById("callsing").value).toString();
+            if(input != ""){
+                var result = new Array;
+                for (let i = 0; i < input.length; i++) {
+                    if(input[i] >= '0' && input[i] <= '9')
+                        result.push(input[i]+'0');
+                    else if(input[i] >= 'A' && input[i] <= 'Z')
+                        result.push(encodeTable[input[i].charCodeAt(0)-65]);
+                    else if(input[i] >= 'a' && input[i] <= 'z')
+                        result.push(encodeTable[input[i].charCodeAt(0)-97]);
+                    
+            }
+            document.getElementById("encodedText").innerHTML ="encoded callsing:<br>" + result.join(' ');
+            }
+            
+        }
+    </script>
+</body>
+</html>
